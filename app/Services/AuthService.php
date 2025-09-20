@@ -6,6 +6,7 @@ use App\Dtos\Auth\AuthResponseDTO;
 use App\Dtos\Auth\LoginDto;
 use App\Dtos\Auth\RegisterDto;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -45,5 +46,11 @@ class AuthService
         $token = $user->createToken('auth_token')->accessToken;
 
         return new AuthResponseDTO($user, $token);
+    }
+
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+        return response()->json(['message' => 'Logged out']);
     }
 }

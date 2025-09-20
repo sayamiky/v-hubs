@@ -76,4 +76,14 @@ class User extends Authenticatable
     {
         return ['uuid'];
     }
+
+    public function stories()
+    {
+        return $this->hasMany(Story::class);
+    }
+
+    public function timelines()
+    {
+        return $this->hasMany(Timeline::class);
+    }
 }
