@@ -5,7 +5,7 @@ namespace App\Http\Resources\Timeline;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TimelineResource extends JsonResource
+class TimelineCommentResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,13 +16,12 @@ class TimelineResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'timeline_post_id' => $this->timeline_post_id,
             'user_id' => $this->user_id,
             'user_name' => $this->user->name,
-            'title' => $this->title,
-            'description' => $this->description,
-            'visibility' => $this->visibility ,
-            'media' => TimelineMediaResource::collection($this->whenLoaded('media')),
+            'content' => $this->content,
             'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

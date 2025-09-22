@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class TimelineMedia extends Model
 {
+    use HasUuids;
+    
     protected $table = 'timeline_medias';
     protected $fillable = [
         'timeline_post_id',

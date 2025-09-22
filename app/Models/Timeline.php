@@ -39,4 +39,14 @@ class Timeline extends Model
     {
         return $this->hasMany(TimelineMedia::class, 'timeline_post_id', 'id');
     }
+
+    public function comment()
+    {
+        return $this->hasMany(TimelineComment::class, 'timeline_post_id', 'id');
+    }
+
+    public function like()
+    {
+        return $this->hasMany(TimelineLike::class, 'timeline_post_id', 'id');
+    }
 }

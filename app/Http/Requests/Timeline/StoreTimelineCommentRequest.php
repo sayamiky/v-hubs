@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Story;
+namespace App\Http\Requests\Timeline;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreStoryRequest extends FormRequest
+class StoreTimelineCommentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,8 @@ class StoreStoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'caption' => ['nullable', 'string'],
-            'visibility' => ['required', 'in:public,private,friends'],
-            'media_path' => ['required', 'file', 'mimes:jpg,jpeg,png,gif,mp4,mov,avi', 'max:10240'], // max 10MB
+            'timeline_post_id' => ['required', 'string', 'exists:timeline_posts,id'],
+            'content' => ['required', 'string']
         ];
     }
 }

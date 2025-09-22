@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stories', function (Blueprint $table) {
+        Schema::create('timeline_comments', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->uuid('timeline_post_id');
+            $table->foreign('timeline_post_id')->references('id')->on('timeline_posts')->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('media_path');
-            $table->string('caption')->nullable();
-            $table->timestamp('expires_at');
-            $table->string('deleted_by')->nullable();
-            $table->softDeletes();
+            $table->text('content');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('stories');
+        Schema::dropIfExists('timeline_comments');
     }
 };
