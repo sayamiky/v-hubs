@@ -22,6 +22,7 @@ class AuthService
             'birthdate' => $dto->birthdate,
             'phone' => $dto->phone,
             'email' => $dto->email,
+            'gender' => $dto->gender,
             'password' => Hash::make($dto->password),
             'referral_id' => $dto->referral_id,
         ]);

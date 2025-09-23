@@ -12,6 +12,7 @@ class AuthResponseDTO
     public string $phone;
     public string $email;
     public ?string $role;
+    public string $gender;
     public ?string $referral_id;
     public ?string $token;
 
@@ -22,6 +23,7 @@ class AuthResponseDTO
         $this->birthdate = $user->birthdate;
         $this->phone = $user->phone;
         $this->email = $user->email;
+        $this->gender = $user->gender;
         $this->role  = $user->role;
         $this->referral_id = $user->referral_id;
         $this->token = $token;

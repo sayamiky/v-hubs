@@ -28,6 +28,7 @@ class User extends Authenticatable
         'birthdate',
         'phone',
         'email',
+        'gender',
         'password',
         'referral_id',
     ];

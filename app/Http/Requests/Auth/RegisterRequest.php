@@ -29,6 +29,7 @@ class RegisterRequest extends BaseFormRequest
             'birthdate' => 'required|date',
             'phone' => 'required|string',
             'email' => 'required|email|unique:users,email',
+            'gender' => 'required|in:male,female,other',
             'password' => 'required|string|min:6|confirmed',
             'referral_id' => 'nullable|string'
         ];

@@ -20,6 +20,7 @@ class AuthResource extends JsonResource
             'birthdate' => $this->birthdate,
             'phone' => $this->phone,
             'email' => $this->email,
+            'gender' => $this->gender,
             'role'  => $this->role,
             'referral_id' => $this->referral_id,
             'token' => $this->token,
