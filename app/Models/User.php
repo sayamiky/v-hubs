@@ -97,4 +97,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(TimelineLike::class);
     }
+
+    public function group()
+    {
+        return $this->hasMany(Group::class, 'owner_id', 'id');
+    }
+
+    public function groupMember()
+    {
+        return $this->hasMany(GroupMember::class);
+    }
+
+    public function groupRequest()
+    {
+        return $this->hasMany(GroupRequest::class);
+    }
 }

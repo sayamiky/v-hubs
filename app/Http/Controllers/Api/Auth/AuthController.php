@@ -28,4 +28,13 @@ class AuthController extends Controller
             'status' => true,
         ]);
     }
+
+    public function logout(Request $request, AuthService $service)
+    {
+        $service->logout($request->user());
+        return response()->json([
+            'message' => "logout success!",
+            'status' => true,
+        ]);
+    }
 }
