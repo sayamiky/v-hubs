@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Dtos\Auth\AuthResponseDTO;
+use App\Dtos\Auth\AuthResponseDto;
 use App\Dtos\Auth\LoginDto;
 use App\Dtos\Auth\RegisterDto;
 use App\Models\User;
@@ -14,7 +14,7 @@ use Illuminate\Validation\ValidationException;
 
 class AuthService
 {
-    public function register(RegisterDto $dto): AuthResponseDTO
+    public function register(RegisterDto $dto): AuthResponseDto
     {
         $user = User::create([
             'uuid' => Str::uuid(),
@@ -32,10 +32,10 @@ class AuthService
 
         $token = $user->createToken('auth_token')->accessToken;
 
-        return new AuthResponseDTO($user, $token);
+        return new AuthResponseDto($user, $token);
     }
 
-    public function login(LoginDto $dto): AuthResponseDTO
+    public function login(LoginDto $dto): AuthResponseDto
     {
         if (!Auth::attempt(['email' => $dto->email, 'password' => $dto->password])) {
             throw ValidationException::withMessages([
@@ -46,7 +46,7 @@ class AuthService
         $user  = Auth::user();
         $token = $user->createToken('auth_token')->accessToken;
 
-        return new AuthResponseDTO($user, $token);
+        return new AuthResponseDto($user, $token);
     }
 
     public function logout(Request $request)

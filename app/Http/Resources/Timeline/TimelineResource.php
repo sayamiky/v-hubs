@@ -18,6 +18,8 @@ class TimelineResource extends JsonResource
             'id' => $this->id,
             'user_id' => $this->user_id,
             'user_name' => $this->user->name,
+            'group_id' => $this->group_id,
+            'group_name' => $this->group ? $this->group->name : null,
             'title' => $this->title,
             'description' => $this->description,
             'visibility' => $this->visibility ,

@@ -6,6 +6,7 @@ class CreateTimelineDto
 {
     public function __construct(
         public string $user_id,
+        public ?string $group_id,
         public string $title,
         public ?string $description,
         public string $visibility,
@@ -16,6 +17,7 @@ class CreateTimelineDto
     {
         return new self(
             user_id: auth()->user()->id,
+            group_id: $request->group_id,
             title: $request->title,
             description: $request->description,
             visibility: $request->visibility,

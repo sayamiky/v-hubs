@@ -4,7 +4,7 @@ namespace App\Dtos\Auth;
 
 use App\Models\User;
 
-class AuthResponseDTO
+class AuthResponseDto
 {
     public string $uuid;
     public string $name;

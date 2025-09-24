@@ -25,6 +25,7 @@ class UpdateTimelineRequest extends FormRequest
             'title' => 'sometimes|string|max:255',
             'description' => 'sometimes|string',
             'visibility' => 'sometimes|in:public,private,friends',
+            'group_id' => 'nullable|exists:groups,id',
             'media.*.media_type' => 'sometimes|string',
             'media.*.media_path' => 'sometimes|mimes:mp4,mpg,mpeg,avi,mov,wmv,jpeg,jpg,png|max:15000|in:image,video',
         ];

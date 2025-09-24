@@ -18,6 +18,7 @@ class TimelineService
             'title' => $dto->title,
             'description' => $dto->description,
             'visibility' => $dto->visibility,
+            'group_id' => $dto->group_id,
         ]);
 
         // create medias if exist

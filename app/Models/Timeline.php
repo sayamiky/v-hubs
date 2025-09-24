@@ -13,6 +13,7 @@ class Timeline extends Model
     protected $table = 'timeline_posts';
     protected $fillable = [
         'user_id',
+        'group_id',
         'title',
         'description',
         'visibility',
@@ -48,5 +49,10 @@ class Timeline extends Model
     public function like()
     {
         return $this->hasMany(TimelineLike::class, 'timeline_post_id', 'id');
+    }
+
+    public function group()
+    {
+        return $this->belongsTo(Group::class, 'group_id', 'id');
     }
 }

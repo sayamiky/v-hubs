@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Group;
+namespace App\Http\Controllers\Api\Group;
 
 use App\Http\Controllers\Controller;
 use App\Models\Group;
@@ -82,6 +82,24 @@ class GroupController extends Controller
     {
         $group->delete();
         return response()->json([
+            'message' => 'success',
+            'status' => true
+        ]);
+    }
+
+    public function myGroup(Request $request)
+    {
+        $user = Auth::user()->id;
+        $groups = QueryBuilder::for(Group::with('owner')->where('owner_id', $user)->orWhereHas('member', function ($query) use ($user) {
+            $query->where('user_id', $user);
+        }))
+            ->allowedSorts('id')
+            ->orderBy('id', 'DESC')
+            ->paginate(
+                $perPage = $request->perPage
+            )->withQueryString();
+
+        return GroupResource::collection($groups)->additional([
             'message' => 'success',
             'status' => true
         ]);

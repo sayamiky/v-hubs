@@ -5,9 +5,9 @@ use App\Http\Controllers\Api\StoryController;
 use App\Http\Controllers\Api\Timeline\PostController;
 use App\Http\Controllers\Api\Timeline\TimelineCommentController;
 use App\Http\Controllers\Api\Timeline\TimelineLikeController;
-use App\Http\Controllers\Group\GroupController;
-use App\Http\Controllers\Group\GroupMemberController;
-use App\Http\Controllers\Group\GroupRequestController;
+use App\Http\Controllers\Api\Group\GroupController;
+use App\Http\Controllers\Api\Group\GroupMemberController;
+use App\Http\Controllers\Api\Group\GroupRequestController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,12 +20,14 @@ Route::group(['prefix' => 'v1'], function () {
     Route::group(['prefix' => 'auth'], function () {
         Route::post('/register', [AuthController::class, 'register']);
         Route::post('/login', [AuthController::class, 'login']);
+        Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
     });
 
     Route::group(['middleware' => ['auth:api']], function () {
         Route::group(['prefix' => 'timeline'], function () {
             Route::apiResource('/posts', PostController::class);
             Route::get('/posts-profile', [PostController::class, 'timelineProfile']);
+            Route::get('/posts-group', [PostController::class, 'timelineGroup']);
             Route::apiResource('/comments', TimelineCommentController::class);
             Route::get('/posts/{post}/comment', [TimelineCommentController::class, 'commentByPost']);
             Route::apiResource('/likes', TimelineLikeController::class)->only(['store', 'destroy']);
@@ -33,16 +35,15 @@ Route::group(['prefix' => 'v1'], function () {
         });
 
         Route::apiResource('groups', GroupController::class);
-        Route::get('/my-groups', [GroupController::class, 'myGroups']);
         Route::group(['prefix' => 'group'], function () {
             Route::apiResource('/members', GroupMemberController::class);
             Route::get('/{group}/members', [GroupMemberController::class, 'memberByGroup']);
             Route::apiResource('/requests', GroupRequestController::class);
             Route::get('/{group}/requests', [GroupRequestController::class, 'requestByGroup']);
+
+            Route::get('/my-groups', [GroupController::class, 'myGroup']);
         });
 
         Route::apiResource('stories', StoryController::class);
-
-        Route::post('/logout', [AuthController::class, 'logout']);
     });
 });

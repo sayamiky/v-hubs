@@ -25,6 +25,7 @@ class StoreTimelineRequest extends FormRequest
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'visibility' => 'required|in:public,private,friends',
+            'group_id' => 'nullable|exists:groups,id',
             'media.*.media_type' => 'required|string',
             'media.*.media_path' => 'required|mimes:mp4,mpg,mpeg,avi,mov,wmv,jpeg,jpg,png|max:15000|in:image,video',
         ];

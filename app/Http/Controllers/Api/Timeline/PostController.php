@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Api\Timeline;
 
 use App\Dtos\Timeline\CreateTimelineDto;
@@ -30,6 +31,7 @@ class PostController extends Controller
         $posts = QueryBuilder::for($this->timelineService->getAll())
             ->allowedFilters([
                 AllowedFilter::exact('title'),
+                AllowedFilter::exact('visibility'),
             ])
             ->allowedSorts('id')
             ->orderBy('id', 'DESC')
@@ -98,6 +100,26 @@ class PostController extends Controller
         $posts = QueryBuilder::for(Timeline::with('media')->where('user_id', auth()->user()->id))
             ->allowedFilters([
                 AllowedFilter::exact('visibility'),
+            ])
+            ->allowedSorts('id')
+            ->orderBy('id', 'DESC')
+            ->paginate(
+                $perPage = $request->perPage
+            )->withQueryString();
+
+        return TimelineResource::collection($posts)->additional([
+            'message' => 'success',
+            'status' => true
+        ]);
+    }
+
+    function timelineGroup(Request $request)
+    {
+        $posts = QueryBuilder::for(Timeline::with('media')->whereNotNull('group_id'))
+            ->allowedFilters([
+                AllowedFilter::exact('visibility'),
+                AllowedFilter::exact('group_id'),
+                AllowedFilter::exact('title'),
             ])
             ->allowedSorts('id')
             ->orderBy('id', 'DESC')
