@@ -11,16 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('groups', function (Blueprint $table) {
+        Schema::create('market_categories', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->string('cover_image')->nullable(); 
-            $table->uuid('owner_id'); 
-            $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
-            $table->enum('privacy', ['public', 'private'])->default('public');
-            $table->string('deleted_by')->nullable();
-            $table->softDeletes();
+            $table->string('icon')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('groups');
+        Schema::dropIfExists('market_categories');
     }
 };

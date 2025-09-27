@@ -17,7 +17,6 @@ class AuthService
     public function register(RegisterDto $dto): AuthResponseDto
     {
         $user = User::create([
-            'uuid' => Str::uuid(),
             'name' => $dto->name,
             'birthdate' => $dto->birthdate,
             'phone' => $dto->phone,
@@ -27,8 +26,8 @@ class AuthService
             'referral_id' => $dto->referral_id,
         ]);
 
-
-        $user->assignRole($dto->role); // ✅ assign role (wajib role sudah ada di tabel roles)
+        $role = $dto->referral_id ? 'seller' : 'user';
+        $user->assignRole($role); // ✅ assign role 
 
         $token = $user->createToken('auth_token')->accessToken;
 

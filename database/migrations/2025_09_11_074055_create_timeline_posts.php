@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('timeline_posts', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->uuid('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('title');
             $table->text('description');
             $table->enum('visibility', ['public', 'private']);

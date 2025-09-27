@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('stories', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->uuid('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('media_path');
             $table->string('caption')->nullable();
             $table->enum('visibility', ['public', 'private', 'friends']);

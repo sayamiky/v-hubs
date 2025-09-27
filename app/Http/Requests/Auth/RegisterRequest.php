@@ -24,12 +24,12 @@ class RegisterRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'role' => 'required|in:user,seller',
+            // 'role' => 'required|in:user,seller',
             'name' => 'required|string',
             'birthdate' => 'required|date',
             'phone' => 'required|string',
             'email' => 'required|email|unique:users,email',
-            'gender' => 'required|in:male,female,other',
+            'gender' => 'required|in:laki-laki,perempuan,lainnya',
             'password' => 'required|string|min:6|confirmed',
             'referral_id' => 'nullable|string'
         ];

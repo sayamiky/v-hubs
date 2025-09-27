@@ -75,7 +75,7 @@ class User extends Authenticatable
      */
     public function uniqueIds(): array
     {
-        return ['uuid'];
+        return ['id'];
     }
 
     public function story()

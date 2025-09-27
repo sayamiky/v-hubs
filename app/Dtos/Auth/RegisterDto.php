@@ -5,7 +5,7 @@ namespace App\Dtos\Auth;
 class RegisterDto
 {
     public function __construct(
-        public string $role, 
+        // public string $role, 
         public string $name,
         public string $birthdate,
         public string $phone,

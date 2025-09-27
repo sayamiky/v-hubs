@@ -6,7 +6,7 @@ use App\Models\User;
 
 class AuthResponseDto
 {
-    public string $uuid;
+    public string $id;
     public string $name;
     public string $birthdate;
     public string $phone;
@@ -18,13 +18,13 @@ class AuthResponseDto
 
     public function __construct(User $user, ?string $token = null)
     {
-        $this->uuid  = $user->uuid;
+        $this->id  = $user->id;
         $this->name  = $user->name;
         $this->birthdate = $user->birthdate;
         $this->phone = $user->phone;
         $this->email = $user->email;
         $this->gender = $user->gender;
-        $this->role  = $user->role;
+        $this->role  = $user->getRoleNames()->first(); // ambil role pertama
         $this->referral_id = $user->referral_id;
         $this->token = $token;
     }
