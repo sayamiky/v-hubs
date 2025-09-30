@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Dtos\Timeline\CreateTimelineDTO;
+use App\Dtos\Timeline\CreateTimelineDto;
 use App\Models\Timeline;
 use App\Traits\UploadFile;
 use Illuminate\Support\Str;
